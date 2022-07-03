@@ -1,0 +1,80 @@
+# Einzelschätzungen
+
+## Tatsächliche Preise
+
+### Gesamtverteilung
+
+![distribution_price](img/distribution_price.png)
+
+### Die 10 häufigsten Preise
+
+{{ distribution_table_price }}
+
+## Lars' Schätzungen
+
+### Gesamtverteilung
+
+![distribution_lars](img/distribution_lars.png)
+
+### Die 10 häufigsten Schätzungen
+
+{{ distribution_table_lars }}
+
+### Exakte Treffer
+
+{{ exact_guesses_lars }}
+
+## Florentins Schätzungen
+
+### Gesamtverteilung
+
+![distribution_florentin](img/distribution_florentin.png)
+
+### Die 10 häufigsten Schätzungen
+
+{{ distribution_table_florentin }}
+
+### Florentins exakte Treffer
+
+{{ exact_guesses_florentin }}
+
+## Der Geier-Korridor
+
+Wer hat häufiger gegeiert?
+
+![geierkorridor](img/geierkorridor.png)
+
+!!! note "Definition von Geiern"
+
+    Die Geier-Versuche wurden mithilfe des [Geierkorridors](https://github.com/fabianallendorf/klixx-data/issues/3#issuecomment-851068557) ermittelt.
+    Für Verflixxte Klixx liegt der "Höflichkeitsabstand" bei 5/8 = 0.625. Für Pfiffige Ziffern musste der Abstand auf {{ geier_ratio }} angepasst werden um sinnvolle Ergebnisse zu erhalten.
+    Der "Höflichkeitsabstand" bzw. Geier-Korridor ist durch die schwarzen Linien gekennzeichnet.
+
+Geier-Versuche Lars:
+
+{{ geier_attempts_lars }}
+
+Geier-Versuche Florentin:
+
+{{ geier_attempts_florentin }}
+
+## Der Senfkarten-Fluch
+
+Schätzungen bei gezogener Senfkarte:
+
+{% set win_ratio_senfkarte_lars = "%.2f"|format(senfkarten_stats.Lars.win / (senfkarten_stats.Lars.win + senfkarten_stats.Lars.lose)) %}
+{% set win_ratio_senfkarte_florentin = "%.2f"|format(senfkarten_stats.Florentin.win / (senfkarten_stats.Florentin.win + senfkarten_stats.Florentin.lose)) %}
+
+| | Lars | Florentin |
+| - | - | - |
+| Gewonnen | {{ senfkarten_stats.Lars.win }} | {{ senfkarten_stats.Florentin.win }} |
+| Verloren | {{ senfkarten_stats.Lars.lose }} | {{ senfkarten_stats.Florentin.lose }} |
+| Gewinnverhältnis (Senfkarte) | {{ win_ratio_senfkarte_lars }} | {{ win_ratio_senfkarte_florentin }} |
+| Gewinnverhältnis (Gesamt) | {{ "%.2f"|format(senfkarten_stats.Lars.win_ratio_total) }} | {{ "%.2f"|format(senfkarten_stats.Florentin.win_ratio_total) }} |
+
+Der Senfkarten-Fluch ist nicht existent. Tatsächlich ist das Gewinnverhältnis bei gezogener Senfkarte bei beiden Spielen höher.
+
+!!! note "Fehlende Senfkarten-Schätzungen"
+
+    - In Episode 30 wurde keine Senfkarten gezogen.
+    - In Episode 41 gab es ein Unentschieden bei gezogener Senfkarte von Florentin. Diese Schätzung geht nicht in die Statistik ein.
