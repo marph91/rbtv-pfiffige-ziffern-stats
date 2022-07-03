@@ -10,7 +10,7 @@ Es gibt einige Stellen, an denen geholfen werden kann:
 
 - Daten für neue Episoden hinzufügen: Dazu einfach die Schätzungen in `data/guesses.csv` und die Metadaten in `data/episodes.csv` ergänzen.
 - Neue Auswertungen ergänzen: Dazu am Besten als erstes ein [Issue](https://github.com/marph91/rbtv-pfiffige-ziffern-stats/issues) erstellen, in dem die Implementierung diskutiert werden kann.
-- Review der Grafiken und Tabellen: Die Daten wurden alle manuell eingegeben. Auch die Implementierung kann fehlerhaft sein. Falls dir etwas auffällt, erstelle gern ein [Issue](https://github.com/marph91/rbtv-pfiffige-ziffern-stats/issues).
+- Review der Rechtschreibung, Grafiken und Tabellen: Die Daten wurden manuell eingegeben. Auch die Implementierung kann fehlerhaft sein. Falls dir etwas auffällt, erstelle gern ein [Issue](https://github.com/marph91/rbtv-pfiffige-ziffern-stats/issues).
 
 ## Workflow
 
