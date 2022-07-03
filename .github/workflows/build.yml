@@ -12,4 +12,4 @@ jobs:
       - name: Generate markdown
         run: python3 scripts/generate_charts_tables.py
       - name: Publish to github pages
-        run: mkdocs gh-deploy
+        run: mkdocs gh-deploy --force
