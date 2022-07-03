@@ -17,6 +17,9 @@ import pandas as pd
 # - Undercover-Karte
 
 
+# Prepare folder structure.
+Path("docs/img").mkdir(parents=True, exist_ok=True)
+
 # Prepare jinja templates.
 env = Environment(
     loader=FileSystemLoader("templates"),
