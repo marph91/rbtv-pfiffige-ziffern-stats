@@ -341,16 +341,15 @@ render_template(
 #######################################
 
 
-table_episodes_total = pd.DataFrame(columns=["Metrik", "Lars", "Florentin"])
+table_episodes_total = pd.DataFrame(
+    columns=["Metrik", "Lars", "Florentin"], index=["Metrik"]
+)
 
 
 def add_metric(name, value_lars, value_florentin):
-    # TODO: check for better append solution
     global table_episodes_total
-    table_episodes_total = table_episodes_total.append(
-        {"Metrik": name, "Lars": value_lars, "Florentin": value_florentin},
-        ignore_index=True,
-    )
+
+    table_episodes_total.loc[name] = {"Lars": value_lars, "Florentin": value_florentin}
 
 
 add_metric(
@@ -398,7 +397,7 @@ plt.savefig("docs/img/winner.png")
 # Render template
 render_template(
     "comparison.md.j2",
-    total_comparison=table_episodes_total.set_index("Metrik").to_markdown(),
+    total_comparison=table_episodes_total.to_markdown(),
 )
 
 
