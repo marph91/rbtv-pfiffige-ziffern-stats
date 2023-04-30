@@ -265,22 +265,18 @@ render_template(
 # episodes.md
 #######################################
 
-
-table_episodes = pd.DataFrame(
-    columns=["index", "guesses", "score_lars", "score_florentin"]
-)
-
+stats_per_episode = []
 for episode in set(table["episode"].tolist()):
     guesses = table[table["episode"] == episode]
-    table_episodes = table_episodes.append(
+    stats_per_episode.append(
         {
             "index": episode,
             "guesses": len(guesses),
             "score_lars": sum(guesses[guesses["winner"] == "Lars"]["score"]),
             "score_florentin": sum(guesses[guesses["winner"] == "Florentin"]["score"]),
-        },
-        ignore_index=True,
+        }
     )
+table_episodes = pd.DataFrame(stats_per_episode)
 
 table_episodes["winner"] = np.where(
     table_episodes["score_lars"] > table_episodes["score_florentin"],
@@ -342,47 +338,44 @@ render_template(
 
 
 table_episodes_total = pd.DataFrame(
-    columns=["Metrik", "Lars", "Florentin"], index=["Metrik"]
+    [
+        {
+            "Metrik": "Kronen",
+            "Lars": table_episodes["winner"].value_counts()["Lars"],
+            "Florentin": table_episodes["winner"].value_counts()["Florentin"],
+        },
+        {
+            "Metrik": "Punkte pro Episode",
+            "Lars": table_episodes["score_lars"].mean().round(2),
+            "Florentin": table_episodes["score_florentin"].mean().round(2),
+        },
+        {
+            "Metrik": "Gesamtpunkte",
+            "Lars": table_episodes["score_lars"].sum(),
+            "Florentin": table_episodes["score_florentin"].sum(),
+        },
+        {
+            "Metrik": "Gewonnene Schätzungen",
+            "Lars": table["winner"].value_counts()["Lars"],
+            "Florentin": table["winner"].value_counts()["Florentin"],
+        },
+        {
+            "Metrik": "Exakte Treffer",
+            "Lars": len(get_exact_guesses(table, "Lars")),
+            "Florentin": len(get_exact_guesses(table, "Florentin")),
+        },
+        {
+            "Metrik": "Erste Schätzungen",
+            "Lars": table["first_guess"].value_counts()["Lars"],
+            "Florentin": table["first_guess"].value_counts()["Florentin"],
+        },
+        {
+            "Metrik": "Geier-Versuche",
+            "Lars": len(geier_attempts_lars),
+            "Florentin": len(geier_attempts_florentin),
+        },
+    ]
 )
-
-
-def add_metric(name, value_lars, value_florentin):
-    global table_episodes_total
-
-    table_episodes_total.loc[name] = {"Lars": value_lars, "Florentin": value_florentin}
-
-
-add_metric(
-    "Kronen",
-    table_episodes["winner"].value_counts()["Lars"],
-    table_episodes["winner"].value_counts()["Florentin"],
-)
-add_metric(
-    "Punkte pro Episode",
-    table_episodes["score_lars"].mean().round(2),
-    table_episodes["score_florentin"].mean().round(2),
-)
-add_metric(
-    "Gesamtpunkte",
-    table_episodes["score_lars"].sum(),
-    table_episodes["score_florentin"].sum(),
-)
-add_metric(
-    "Gewonnene Schätzungen",
-    table["winner"].value_counts()["Lars"],
-    table["winner"].value_counts()["Florentin"],
-)
-add_metric(
-    "Exakte Treffer",
-    len(get_exact_guesses(table, "Lars")),
-    len(get_exact_guesses(table, "Florentin")),
-)
-add_metric(
-    "Erste Schätzungen",
-    table["first_guess"].value_counts()["Lars"],
-    table["first_guess"].value_counts()["Florentin"],
-)
-add_metric("Geier-Versuche", len(geier_attempts_lars), len(geier_attempts_florentin))
 
 #######################################
 
