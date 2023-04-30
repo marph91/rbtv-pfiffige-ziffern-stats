@@ -375,7 +375,7 @@ table_episodes_total = pd.DataFrame(
             "Florentin": len(geier_attempts_florentin),
         },
     ]
-)
+).set_index("Metrik")
 
 #######################################
 
