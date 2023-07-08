@@ -69,7 +69,7 @@ def calculate_score(dataframe):
             if dataframe["winner"] == "Lars"
             else dataframe["florentin_guess"]
         )
-    # TODO: +1 or *2 for senfkarte?
+    # TODO: +1 or *2 for senfkarte? Or nothing (see episode 61)?
     return 1 + 1 * int(dataframe["winner"] in str(dataframe["senfkarte"]))
 
 
