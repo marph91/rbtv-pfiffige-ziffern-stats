@@ -4,6 +4,7 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 import numpy as np
 import pandas as pd
 
@@ -303,6 +304,8 @@ ax = table_episodes.plot(
     legend=False,
 )
 
+ax.xaxis.set_major_locator(ticker.MultipleLocator(5))
+ax.xaxis.set_minor_locator(ticker.MultipleLocator(1))
 ax.yaxis.grid()
 ax.set_axisbelow(True)
 # https://stackoverflow.com/a/34880501/7410886
@@ -317,6 +320,8 @@ table_episodes_filtered = table_episodes[["score_lars", "score_florentin"]]
 table_episodes_filtered.columns = ["Lars", "Florentin"]  # for better readability
 ax = table_episodes_filtered.plot(kind="bar", xlabel="Episode", ylabel="Punkte")
 
+ax.xaxis.set_major_locator(ticker.MultipleLocator(5))
+ax.xaxis.set_minor_locator(ticker.MultipleLocator(1))
 # https://stackoverflow.com/a/23358722/7410886
 ax.yaxis.grid()
 ax.set_axisbelow(True)
